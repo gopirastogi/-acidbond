@@ -1,0 +1,57 @@
+<!-- templates/order_dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Dashboard</title>
+</head>
+<body>
+    <h1>Order Dashboard</h1>
+    
+    <div>
+        <a href="{% url 'create_order' %}">Create New Order</a>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Address</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Postal Code</th>
+                <th>Email</th>
+                <th>Phone Number</th>
+                <th>Created At</th>
+                <th>Updated At</th>
+                <th>Items</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order in orders %}
+                <tr>
+                    <td>{{ order.id }}</td>
+                    <td>{{ order.address }}</td>
+                    <td>{{ order.city }}</td>
+                    <td>{{ order.country }}</td>
+                    <td>{{ order.postal_code }}</td>
+                    <td>{{ order.email }}</td>
+                    <td>{{ order.phone_number }}</td>
+                    <td>{{ order.created_at }}</td>
+                    <td>{{ order.updated_at }}</td>
+                    <td>
+                        <ul>
+                            {% for item in order.items.all %}
+                                <li>{{ item.product_name }} - Quantity: {{ item.quantity }} - Price: {{ item.price }}</li>
+                            {% empty %}
+                                <li>No items</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

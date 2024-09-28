@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Success</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="alert alert-success mt-5">
+            <h4 class="alert-heading">Thank you for your order!</h4>
+            <p>Your order has been placed successfully.</p>
+            <hr>
+            <p class="mb-0">We will contact you shortly with further details.</p>
+
+            <h1>Order Success</h1>
+{% if messages %}
+    {% for message in messages %}
+        <div>{{ message }}</div>
+    {% endfor %}
+{% endif %}
+
+{% if order %}
+    <p>Thank you, {{ order.name }}. Your order has been placed successfully!</p>
+    <p>Order ID: {{ order.id }}</p>
+    <p>Email: {{ order.email }}</p>
+    <p>Phone: {{ order.phone }}</p>
+    <p>Address: {{ order.address }}</p>
+{% else %}
+    <p>No order details available.</p>
+    
+
+  <a href="{% url 'mans' %}" style="text-decoration: none;">
+    <button style="background-color: #4CAF50; /* Green */
+                   border: none;
+                   color: white;
+                   padding: 15px 32px;
+                   text-align: center;
+                   text-decoration: none;
+                   display: inline-block;
+                   font-size: 16px;
+                   margin: 4px 2px;
+                   cursor: pointer;
+                   border-radius: 4px;">
+        Continue Shopping
+    </button>
+</a>
+
+
+{% endif %}
+
+        </div>
+    </div>
+
+    <!-- Include jQuery and Bootstrap JS for any additional functionality -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

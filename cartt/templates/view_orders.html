@@ -1,0 +1,23 @@
+<!-- templates/create_order.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Order</title>
+</head>
+<body>
+    <h2>Create Order</h2>
+    <h2>Your Orders</h2>
+    <ul>
+        {% for order in orders %}
+            <li>Order ID: {{ order.id }} - Total Price: {{ order.total_price }} - Status: {{ order.status }}</li>
+        {% empty %}
+            <li>No orders found.</li>
+        {% endfor %}
+    </ul>
+    
+
+    <a href="{% url 'view_orders' %}">Back to Dashboard</a>
+</body>
+</html>
