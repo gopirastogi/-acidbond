@@ -1,0 +1,422 @@
+{% extends "base.html" %} 
+{% load static %}
+ {% block content %}
+
+<!-- Slider Area -->
+<section class="hero-slider">
+    <!-- Single Slider -->
+    <div class="single-slider">
+        <img src="{% static "images/bgimage.jpg" %}" alt="#">
+        </div>
+    </div>
+    </div>
+    <!--/ End Single Slider -->
+</section>
+<!--/ End Slider Area -->
+
+<!-- Start Small Banner  -->
+<section class="small-banner section">
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Single Banner  -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-banner">
+                    <img src="{% static "images/Premium Photo _ Blank sweatshirt for men template white color clothing.jpg" %}" alt="#"  style="max-width: 500px; height: 300px;">
+                    <div class="content">
+                        <p>Man's Collectons</p>
+                        <h5>Summer travel <br> collection</h5>
+                        <a href="/mans/?category={{ category.id }}">Discover Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /End Single Banner  -->
+            <!-- Single Banner  -->
+            <div class="col-lg-4 col-md-6 col-12">
+                <div class="single-banner">
+                    <img src="{% static "images/—Pngtree—pastel beige background 3d render_5596272.jpg" %}" alt="#" style="max-width: 500px; height: 300px;">
+                    <div class="content">
+                        <p>Bag Collectons</p>
+                        <h5>ACCESSORIES <br> collection</h5>
+                        <a href="/mans/?category={{ category.id }}">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /End Single Banner  -->
+            <!-- Single Banner  -->
+            <div class="col-lg-4 col-12">
+                <div class="single-banner tab-height">
+                    <img src="{% static "images/white-hoodie-mockup-front-and-back-mockup-studio-with-various-hangers-ai-generated-free-photo.jpg" %}" alt="#" style="max-width: 500px; height: 300px;">
+                    <div class="content">
+                        <p>Flash Sale</p>
+                        <h5>Winter Travel Collectons <br> Up to <span>40%</span> Off</h5>
+                        <a href="/mans/?category={{ category.id }}">Discover Now</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /End Single Banner  -->
+        </div>
+    </div>
+</section>
+<!-- End Small Banner -->
+
+<!-- Start Product Area -->
+<div class="product-area section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-title">
+                    <h2>Trending Item</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="product-info">
+                    <div class="nav-main">
+                        <!-- Tab Nav -->
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            {% for category in categories %}
+                            <li class="nav-item"><a href="/mans/?category={{ category.id }}" role="tab">{{ category.name }}</a></li>
+                            {% endfor %}
+                        </ul>
+                        <!--/ End Tab Nav -->
+                    </div>
+                    <div class="tab-content" id="myTabContent">
+
+
+
+
+
+
+<!-- Start Single Tab -->
+<div class="tab-pane fade show active" id="man" role="tabpanel">
+    <div class="tab-single">
+        <div class="row">
+            <!-- Display the first 6 products -->
+            {% for product in products|slice:":8" %}
+                <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                    <div class="single-product">
+                        <div class="product-img">
+                            <a href="/mans">
+                                <img{% if product.image %}
+                                src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 300px; height: 300px;">
+                                {% else %}
+                                <p>No image available</p>
+                                {% endif %}
+                            </a>
+                            <div class="button-head">
+                                <div class="product-action">
+                                    <!-- Other actions here -->
+                                    <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                    <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                </div>
+                                <div class="product-action-2">
+                                    <form action="{% url 'add_to_cart' product.id %}" method="post">
+                                        {% csrf_token %}
+                                        <button title="Add to cart" type="submit" >Add to Cart</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-content">
+                            <h6>{{ product.name }}</h6>
+                            <div class="product-price">
+                                <span><p>Price: ₹{{ product.price }}</p></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            <!-- Hidden section for additional products -->
+            <div id="more-products" style="display: none;">
+                {% for product in products|slice:"6:" %}
+                    <div class="col-xl-3 col-lg-4 col-md-4 col-12">
+                        <div class="single-product">
+                            <div class="product-img">
+                                <a href="/mans">
+                                    <img{% if product.image %}
+                                    src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 320px; height: 320px;">
+                                    {% else %}
+                                    <p>No image available</p>
+                                    {% endif %}
+                                </a>
+                                <div class="button-head">
+                                    <div class="product-action">
+                                        <!-- Other actions here -->
+                                        <a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+                                        <a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+                                    </div>
+                                    <div class="product-action-2">
+                                        <form action="{% url 'add_to_cart' product.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button title="Add to cart" type="submit" >Add to Cart</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-content">
+                                <h6>{{ product.name }}</h6>
+                                <div class="product-price">
+                                    <span><p>Price: ₹{{ product.price }}</p></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            {% if product in products|slice:":4"%}
+                <button id="show-more-btn" class="btn btn-primary">Show More</button>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const showMoreBtn = document.getElementById('show-more-btn');
+    const moreProducts = document.getElementById('more-products');
+
+    if (showMoreBtn) {
+        showMoreBtn.addEventListener('click', function() {
+            moreProducts.style.display = 'flex'; // Adjust as needed
+            showMoreBtn.style.display = 'none'; // Hide the "Show More" button after clicking
+        });
+    }
+});
+</script>
+
+
+    <br>
+    <br>
+
+
+
+
+    <!-- Start Midium Banner  -->
+    <section class="midium-banner">
+        <div class="container">
+            <div class="row">
+                <!-- Single Banner  -->
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="single-banner">
+                        <img src="{% static "images/xl-reguler-t-shirt-jay-sanidev-enterprise-original-imagdkzumpdxrvnn.jpg" %}" alt="#" style="max-width: 600px; height: 375px;">
+                    <div class="content">
+                            <p>Summer Collectons</p>
+                            <h3>Summer items <br>Up to<span> 50%</span></h3>
+                            <a href="/mans/?category={{ category.id }}">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /End Single Banner  -->
+                <!-- Single Banner  -->
+                <div class="col-lg-6 col-md-6 col-12">
+                    <div class="single-banner">
+                        <img src="{% static "images/200919747-colorful-hoodies-isolated-on-grey-background-mockup-for-design.jpg" %}" alt="#" style="max-width: 600px; height: 375px;" >
+                    <div class="content">
+                            <p>Winter Collectons</p>
+                            <h3>Winter items <br> up to <span>70%</span></h3>
+                            <a href="/mans/?category={{ category.id }}" class="btn">Shop Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /End Single Banner  -->
+            </div>
+        </div>
+</div>
+</section>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- End Midium Banner -->
+
+
+
+	<!-- Start Most Popular -->
+	<div class="product-area most-popular section">
+        <div class="container">
+            <div class="row">
+				<div class="col-12">
+					<div class="section-title">
+						<h2>Hot Item</h2>
+					</div>
+				</div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="owl-carousel popular-slider">
+						<!-- Start Single Product -->
+                        {% for product in products %}
+						<div class="single-product">
+                            <div class="product-img">
+                                <a href="/mans">
+                                    <img{% if product.image %} <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: 300px; height: 300px;">
+                                                        {% else %}
+                                                        <p>No image available</p>
+                                                        {% endif %}
+                                                    </a>
+								<div class="button-head">
+									<div class="product-action">
+										<a title="Wishlist" href="#"><i class=" ti-heart "></i><span>Add to Wishlist</span></a>
+										<a title="Compare" href="#"><i class="ti-bar-chart-alt"></i><span>Add to Compare</span></a>
+									</div>
+									<div class="product-action-2">
+                                        <form action="{% url 'add_to_cart' product.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button title="Add to cart" type="submit" >Add to Cart</button>
+                                        </form>
+									</div>
+								</div>
+                            </div>
+                            <div class="product-content">
+                                <h3><a href="/mans">{{ product.name }}</a></h3>
+                                <div class="product-price">
+                                    <span>${{ product.price }}</span>
+                                </div>
+                            </div>
+                        </div>                    
+                        {% endfor %}
+						<!-- End Single Product -->
+						
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	<!-- End Most Popular Area -->
+
+
+<!-- End Most Popular Area -->
+
+<section class="section free-version-banner">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-8 offset-md-2 col-xs-12">
+                <div class="section-title mb-60">
+                    <span class="text-white wow fadeInDown" data-wow-delay=".2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInDown;" >Acid@Bond</span>
+                    <h2 class="text-white wow fadeInUp" data-wow-delay=".4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">Welcome to our store<br> Your fashion journey starts here.</h2>
+                    <p class="text-white wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">Our classic cotton t-shirt is a wardrobe staple, offering unparalleled comfort and versatility.</p>
+
+                    <div class="button">
+                        <a href="#" target="_blank" rel="nofollow" class="btn wow fadeInUp" data-wow-delay=".8s">Purchase Now</a>
+                        <p class="text-white wow fadeInUp" data-wow-delay=".6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">Wear Your Confidance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</section>
+
+
+<!-- Start Shop Services Area -->
+<section class="shop-services section home">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-rocket"></i>
+                    <h4>Free shiping</h4>
+                    <p>Orders over $100</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-reload"></i>
+                    <h4>Free Return</h4>
+                    <p>Within 30 days returns</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-lock"></i>
+                    <h4>Sucure Payment</h4>
+                    <p>100% secure payment</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+            <div class="col-lg-3 col-md-6 col-12">
+                <!-- Start Single Service -->
+                <div class="single-service">
+                    <i class="ti-tag"></i>
+                    <h4>Best Peice</h4>
+                    <p>Guaranteed price</p>
+                </div>
+                <!-- End Single Service -->
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Shop Services Area -->
+
+<!-- Start Shop Newsletter  -->
+<section class="shop-newsletter section">
+    <div class="container">
+        <div class="inner-top">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2 col-12">
+                    <!-- Start Newsletter Inner -->
+                    <div class="inner">
+                        <h4>Newsletter</h4>
+                        <p> Subscribe to our newsletter and get <span>10%</span> off your first purchase</p>
+                        <form action="#" method="get" target="_blank" class="newsletter-inner">
+                            <input name="EMAIL" placeholder="Your email address" required="" type="email">
+                            <button class="btn">Subscribe</button>
+                        </form>
+                    </div>
+                    <!-- End Newsletter Inner -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Shop Newsletter -->
+
+	<!-- Modal -->
+    {% for product in products %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span class="ti-close" aria-hidden="true"></span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row no-gutters">
+                        <div class="col-lg-6 offset-lg-3 col-12">
+                            <img{% if product.image %} <img src="{{ product.image.url }}" alt="{{ product.name }}" style="max-width: auto; height: auto;">
+                                    {% else %}
+                                    <p>No image available</p>
+                                    {% endif %}
+                                
+                            <h4 style="margin-top:100px;font-size:14px; font-weight:500; color:#F7941D; display:block; margin-bottom:5px;">Eshop Free Litee</h4>
+                            <h3 style="font-size:30px;color:#333;">{{ product.name }}<h3>
+                            <p style="display:block; margin-top:20px; color:#888; font-size:14px; font-weight:400;"> <a href=" {{ product.description }}">
+                            </p>
+                                <span>${{ product.price }}</span>
+                            <div class="button" style="margin-top:30px;">
+                                <a href="#" target="_blank" class="btn" style="color:#fff;">Buy Now!</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endfor %}
+<!-- Modal end -->
+
+
+
+{% endblock %}

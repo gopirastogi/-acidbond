@@ -1,0 +1,86 @@
+{% extends "profile.html" %}
+{% load static %}
+{% block profile %}
+<!-- Orders Table-->
+<div class="col-lg-8 pb-5">
+    <div class="d-flex justify-content-end pb-3">
+        <div class="form-inline">
+            <label class="text-muted mr-3" for="order-sort">Sort Orders</label>
+            <select class="form-control" id="order-sort">
+                <option>All</option>
+                <option>Delivered</option>
+                <option>In Progress</option>
+                <option>Delayed</option>
+                <option>Canceled</option>
+            </select>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover mb-0">
+            <thead>
+                <tr>
+                    <th>Order #</th>
+                    <th>Date Purchased</th>
+                    <th>Status</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                <tr>
+                    <td><a class="navi-link" href="#order-details" data-toggle="modal">{{ order.id }}</a></td>
+                    <td>{{ order.created_at|date:"Y-m-d H:i:s" }}</td>
+                    <td><span class="{{ order.status|lower }}">{{ order.status }}</span></td>
+                    <td><span>{{ order.total_price }}</span></td>
+                </tr>
+                {% empty %}
+                <li>No orders found.</li>
+            {% endfor %}
+        </ul>
+
+            </tbody>
+           
+  
+        </table>
+    </div>
+</div>
+</div>
+</div>
+
+{% endblock %}
+
+
+
+{% block extra_styles %}
+<style>
+    /* Table Row Styling */
+    table tbody tr:hover {
+        background-color: #f5f5f5;
+    }
+
+    /* Status Badge Styling */
+    .badge-status {
+        padding: 0.5em;
+        font-weight: bold;
+        border-radius: 0.25rem;
+        color: #fff;
+    }
+
+    /* Specific Status Colors */
+    .delivered {
+        background-color: #28a745; /* Green */
+    }
+    
+    .in-progress {
+        background-color: #17a2b8; /* Blue */
+    }
+    
+    .delayed {
+        background-color: #ffc107; /* Yellow */
+    }
+    
+    .canceled {
+        background-color: #dc3545; /* Red */
+    }
+</style>
+{% endblock %}

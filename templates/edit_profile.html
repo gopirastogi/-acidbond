@@ -1,0 +1,31 @@
+{% extends "profile.html" %}
+
+{% block profile %}
+
+  <!-- Profile Settings-->
+  <div class="col-lg-8 pb-5">
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Save Changes</button>
+        <a href="{% url 'profile_view' %}" class="btn btn-style-1 btn-secondary">Cancel</a>
+            
+    </form>
+            </div>
+        </div>
+        
+        
+        <div class="col-12">
+            <hr class="mt-2 mb-3">
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+                
+                
+                
+                </div>
+        </div>
+    </form>
+</div>
+</div>
+
+
+{% endblock %}

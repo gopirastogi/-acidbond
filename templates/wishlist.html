@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<style>
+
+   
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+    
+    .dashboard-container {
+        display: flex;
+        min-height: 100vh;
+    }
+    
+    .sidebar {
+        width: 250px;
+        background-color: #333;
+        color: white;
+        padding: 20px;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+    
+    .sidebar h2 {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+    
+    .sidebar-menu {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .sidebar-menu li {
+        margin: 15px 0;
+    }
+    
+    .sidebar-menu li a {
+        color: white;
+        text-decoration: none;
+        font-size: 18px;
+        display: block;
+        padding: 10px 15px;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+    
+    .sidebar-menu li a:hover {
+        background-color: #555;
+    }
+    
+    .main-content {
+        flex: 1;
+        padding: 20px;
+        background-color: white;
+    }
+    
+    .main-content #content {
+        margin-top: 20px;
+    }
+    
+    table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 15px 20px;  /* Add padding to create space between columns */
+    text-align: left;
+    border-bottom: 1px solid #ddd;  /* Optional: Add a bottom border to separate rows */
+}
+
+th {
+    background-color: #f2f2f2;  /* Optional: Add a background color to the header */
+    font-weight: bold;
+}
+
+td {
+    background-color: #fff;  /* Background color for table cells */
+}
+
+
+
+</style>
+<body>
+    
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- This area will display the content for the selected menu option -->
+            <div id="content">
+                <!-- Display My Orders -->
+                <h2>My Orders</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Date</th>
+                            <th>Status</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#12345</td>
+                            <td>2024-08-27</td>
+                            <td>Shipped</td>
+                            <td>$99.99</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <!-- Display Wishlist/Cart Summary -->
+                <h2>Wishlist/Cart</h2>
+                <ul>
+                    {% if cart_items %}
+                        {% for item in cart_items %}
+                        <li>{{ item.product.name }}<span>${{ item.product.price }}</span></li>
+                        {% endfor %}
+                        <li>(+) Shipping<span>$10.00</span></li><br><br>
+                        <li>TOTAL<span>${{ total }}</span></li>
+                        <li>Order ID: {{ order.id }}</li> <!-- Display the order ID -->
+                    {% else %}
+                        <p>Your cart is empty.</p>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+
+        document.querySelectorAll('.sidebar-menu a').forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+                
+                // Load content based on the href attribute of the clicked link
+                fetch(this.href)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById('content').innerHTML = html;
+                    })
+                    .catch(error => console.log('Error:', error));
+            });
+        });        
+
+    </script>
+</body>
+</html>
